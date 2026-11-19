@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willshaper's project pages</title>
+<meta name="description" content="Small personal tools and reference pages, mostly for the Minecraft modpack GregTech: New Horizons.">
+<style>
+  :root {
+    --bg: #f4f5f8; --panel: #ffffff; --border: #d8dbe4;
+    --text: #1b1e27; --muted: #5b6075; --link: #1f6fb8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c; --panel: #1c2128; --border: #2d343d;
+      --text: #e6e9ee; --muted: #8a94a3; --link: #6aaee8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  .intro { margin: 0 0 24px; color: var(--muted); }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+       padding: 14px 16px; margin-bottom: 12px; }
+  li h2 { margin: 0 0 4px; font-size: 1.05rem; }
+  li p { margin: 0 0 6px; }
+  a { color: var(--link); }
+  .src { font-size: 0.85rem; }
+  footer { margin-top: 28px; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Willshaper's project pages</h1>
+  <p class="intro">Small personal tools and reference pages, mostly for the Minecraft modpack GregTech: New Horizons. Each page runs entirely in your browser, and its source code is on GitHub.</p>
+  <ul>
+    <li>
+      <h2><a href="GTNH-Stuff/">GTNH Useful Info</a></h2>
+      <p>Searchable reference notes for GregTech: New Horizons.</p>
+      <a class="src" href="https://github.com/Willshaper/GTNH-Stuff">Source code</a>
+    </li>
+    <li>
+      <h2><a href="GTNH-Platline-Level-Maintained/">Platline Level Maintained</a></h2>
+      <p>A checklist for setting up the GregTech: New Horizons Platline on Level Maintained mode: required machines, circuit configs and recipes.</p>
+      <a class="src" href="https://github.com/Willshaper/GTNH-Platline-Level-Maintained">Source code</a>
+    </li>
+    <li>
+      <h2><a href="opis-teleport-helper/">Opis Teleport Helper</a></h2>
+      <p>Turns a row from the in-game /opis Forced Chunks list into /cofh tpx teleport commands for Minecraft.</p>
+      <a class="src" href="https://github.com/Willshaper/opis-teleport-helper">Source code</a>
+    </li>
+    <li>
+      <h2><a href="Royalroad-RSS-Builder/">RoyalRoad RSS Builder (unofficial)</a></h2>
+      <p>Builds one combined RSS feed from a list of Royal Road fictions. Not affiliated with Royal Road.</p>
+      <a class="src" href="https://github.com/Willshaper/Royalroad-RSS-Builder">Source code</a>
+    </li>
+  </ul>
+  <footer>By <a href="https://github.com/Willshaper">Willshaper</a> on GitHub.</footer>
+</main>
+</body>
+</html>
