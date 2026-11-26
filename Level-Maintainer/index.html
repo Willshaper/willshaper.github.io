@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level Maintainer Config List has moved</title>
+<meta name="description" content="The Level Maintainer Config List (an unofficial helper for a GT New Horizons OpenComputers program) has a new address.">
+<style>
+  :root {
+    --bg: #f4f5f8; --panel: #ffffff; --border: #d8dbe4;
+    --text: #1b1e27; --muted: #5b6075; --link: #1f6fb8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171c; --panel: #1c2128; --border: #2d343d;
+      --text: #e6e9ee; --muted: #8a94a3; --link: #6aaee8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5;
+         font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { margin: 0 0 6px; font-size: 1.5rem; }
+  p { margin: 0 0 12px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin: 18px 0; }
+  .muted { color: var(--muted); }
+  a { color: var(--link); }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>The Config List has moved</h1>
+  <p class="muted">The Level Maintainer Config List, an unofficial helper for an OpenComputers program in the Minecraft modpack GT New Horizons, now has its own address:</p>
+  <p><a id="new-link" href="#">new address</a></p>
+
+  <div class="panel hidden" id="lists">
+    <p>This browser has lists saved from the old address: <span id="summary"></span>.</p>
+    <p><a id="move-link" href="#">Open the new address with these lists</a></p>
+    <p class="muted">The new page shows them and asks before adding them. Nothing is sent anywhere: the lists travel in the link itself, which only your browser reads.</p>
+  </div>
+
+  <p class="muted"><a href="https://github.com/Willshaper/Level-Maintainer">Level Maintainer on GitHub</a></p>
+</main>
+<script>
+'use strict';
+// The page's new home. Lists saved here (localStorage is per address) are handed over in
+// the link: #list=<name>&lines=<config.lua lines>&moved=1, the page's share link format.
+const NEW_URL = 'https://willshaper-tools.github.io/Level-Maintainer/';
+
+document.getElementById('new-link').href = NEW_URL;
+document.getElementById('new-link').textContent = NEW_URL;
+
+function luaString(s) { return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'; }
+
+// A saved entry as a config.lua line (plain numbers; the page shows them with k/m/g)
+function line(e) {
+  const threshold = e.threshold > 0 ? String(e.threshold) : 'nil';
+  const extra = (e.fluid ? ', ' + luaString(String(e.fluid)) : '') + (e.discord || e.notify ? ', Discord' : '');
+  return (e.enabled === false ? '--' : '') + `[${luaString(String(e.name))}] = {${threshold}, ${e.count}${extra}},`;
+}
+
+let lists = [];
+try {
+  const data = JSON.parse(localStorage.getItem('lm_configlist') || 'null');
+  if (data && Array.isArray(data.lists)) {
+    lists = data.lists.filter(l => l && typeof l.name === 'string' && Array.isArray(l.entries) && l.entries.length > 0);
+  }
+} catch (e) {
+  lists = [];
+}
+
+if (lists.length > 0) {
+  const params = new URLSearchParams();
+  for (const l of lists) {
+    params.append('list', l.name);
+    params.append('lines', l.entries.filter(e => e && e.name && e.count > 0).map(line).join('\n'));
+  }
+  params.append('moved', '1');
+  document.getElementById('move-link').href = NEW_URL + '#' + params;
+  document.getElementById('summary').textContent = lists.map(l => `${l.name} (${l.entries.length})`).join(', ');
+  document.getElementById('lists').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
